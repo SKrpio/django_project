@@ -4,6 +4,22 @@ from .models import NewsStory
 from .forms import StoryForm
 
 
+from django.shortcuts import render, redirect
+from .forms import CustomerUserCreationForm
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = CustomerUserCreationForm(request.POST)
+        if form.is_valid():
+            # Save the new user account
+            form.save()
+            # Redirect to the login page after successful registration
+            return redirect('login')
+    else:
+        form = CustomerUserCreationForm()
+
+    return render(request, 'users/createAccount.html', {'form': form})
+
 class IndexView(generic.ListView):
     template_name = 'news/index.html'
     context_object_name = "all_stories"
