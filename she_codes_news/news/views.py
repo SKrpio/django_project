@@ -2,8 +2,6 @@ from django.views import generic
 from django.urls import reverse_lazy
 from .models import NewsStory
 from .forms import StoryForm
-
-
 from django.shortcuts import render, redirect
 from .forms import CustomerUserCreationForm
 
@@ -28,7 +26,6 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         '''Return all news stories.'''
         return NewsStory.objects.all().order_by("-pub_date")
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
